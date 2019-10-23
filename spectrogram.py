@@ -24,10 +24,12 @@ def cooley_tukey(X):
         temp[k+N//2] = even[k] - exp(-2.0j*pi*i*k/N)*odd[k]
     return temp
 
-X = []
+'''X = []
 
 for i in range(32):
     X.append(random())
 
 Y = cooley_tukey(X)
-T = dft(X)
+print(Y)'''
+#T = dft(X)
+

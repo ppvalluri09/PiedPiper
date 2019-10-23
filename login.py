@@ -14,7 +14,7 @@ def login_page():
         ''')
 
 def welcome_screen():
-    print('''~~~~~~~~~~~~~~~~ Welcome to PiedPiper ~~~~~~~~~~~~~~~~''')    
+    print('~~~~~~~~~~~~~~~~ Welcome to PiedPiper ~~~~~~~~~~~~~~~~'.center(24))    
 
 def clear(): 
   
@@ -40,7 +40,7 @@ def login_menu():
             if password == ans[0][1]:
                 clear()
                 print('Log In successful, redirecting to app')
-                sleep(3)
+                sleep(1)
                 clear()
                 welcome_screen()
                 return username
@@ -61,7 +61,7 @@ def login_menu():
                 insert_into('credentials', "{}".format(username), "{}".format(password))
                 clear()
                 print('Registration Successfull, please log in with your credentials')
-                sleep(3)
+                sleep(1)
                 clear()
                 welcome_screen()
                 login_menu()
