@@ -78,7 +78,7 @@ def get_data(song_id, table_name = 'total'):
         try:
             command = 'select * from {}'.format(table_name)
             cursor.execute(command)
-            ans = ssursor.fetchall()
+            ans = cursor.fetchall()
             print(ans)
         except Exception as e:
             print('Exception Raised: ' + str(e))
