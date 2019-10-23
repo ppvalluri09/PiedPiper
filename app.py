@@ -3,15 +3,13 @@ from spectrogram import *
 import sounddevice as sd
 import time
 import sys
+from login import *
+import tkinter as tk
 
 fs = 44100
 sd.default.samplerate = fs
 sd.default.channels = 2
-duration = 10
 
-
-def welcome_screen():
-    print('''~~~~~~~~~~~~~~~~ Welcome to PiedPiper ~~~~~~~~~~~~~~~~''')    
 
 def display_menu():
     print('''
@@ -22,13 +20,16 @@ def display_menu():
                 3) Search for a song
                 4) Quit
             ''')
+    
 
 welcome_screen()
+username = login_menu()
+
 display_menu()
 value = int(input('Enter your desired operation:- '))
 
 try:
-    while value is not 4:
+    while True:
 
         if value == 1:
             print('Audio will be recorded in ')
@@ -40,24 +41,30 @@ try:
 
         
             print('Recording Started')
-            # recording = sd.rec(int(duration * fs))
-            # sd.play(recording)
-            # print(recording)
+            duration = 10
+            #recording = record_audio()
+            recording = sd.rec(int(duration * fs), samplerate=fs, channels=2)
+            sd.stop()
+            sd.play(recording)
+            print(recording)
 
+            display_menu()
+            value = int(input('Enter your desired operation:- '))
         elif value == 2:
             print('Fingerprint a song')
+
+            display_menu()
+            value = int(input('Enter your desired operation:- '))
 
         elif value == 3:
             print('Search for the song')
 
+            display_menu()
+            value = int(input('Enter your desired operation:- '))
         elif value == 4:
-            print('Thank you for using PiedPiper')
+            print('Thank you for using PiedPiper ' + username)
             sys.exit()
-
-    display_menu()
-    value = int(input('Enter your desired operation:- '))
     
 except Exception as e:
     print('Exception Raised: ' + str(e))
 
-        
