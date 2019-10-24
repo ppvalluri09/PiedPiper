@@ -23,7 +23,9 @@ def display_menu():
             ''')
 
 def record_audio():
-    return sd.rec(int(duration * fs))
+    recording = sd.rec(int(duration * fs))
+    sd.wait()
+    return recording
     
 
 clear()
@@ -49,7 +51,6 @@ try:
             duration = 3
             #recording = record_audio()
             recording = record_audio()
-            sd.wait()
             print('Recorded')
             #sd.play(recording)
             #print(row for row in recording)
@@ -64,7 +65,7 @@ try:
             transformed_array = np.array(transformed_array)
             magnitude_fft = np.array(magnitude_fft)
             print(transformed_array)
-            print(magnitude_fft)
+            print(magnitude_fft)    
             input('Press any key to continue...')
             clear()
 
