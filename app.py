@@ -1,16 +1,10 @@
 from db import *
-from spectrogram import *
-import sounddevice as sd
 import time
 import sys
 from login import *
-import numpy as np
-from matplotlib import pyplot as plt
+from piedpiper import *
 
-fs = 44100
-sd.default.samplerate = fs
-sd.default.channels = 2
-
+duration = 3
 
 def display_menu():
     print('''
@@ -20,13 +14,7 @@ def display_menu():
                 2) Fingerprint a song
                 3) Search for a song
                 4) Quit
-            ''')
-
-def record_audio():
-    recording = sd.rec(int(duration * fs))
-    sd.wait()
-    return recording
-    
+            ''')    
 
 clear()
 welcome_screen()
@@ -49,29 +37,14 @@ try:
         
             print('Recording Started')
             duration = 3
-            #recording = record_audio()
-            recording = record_audio()
+            recording = record_audio(duration)
             print('Recorded')
             #sd.play(recording)
-            #print(row for row in recording)
 
             recording = recording.tolist()
-            transformed_array = []
-            magnitude_fft = []
-            for row in recording:
-                transformed_array.append(cooley_tukey(list(row)))
-                magnitude_fft.append(np.absolute(row))
-                
-            transformed_array = np.array(transformed_array)
-            magnitude_fft = np.array(magnitude_fft)
-            #print(transformed_array)
-            #print(magnitude_fft)
-            amplitude = []
-            for row in magnitude_fft:
-                amplitude.append((row[0] + row[1]) / 2.0)
-            print(amplitude)
-            plt.plot([x for x in range(len(amplitude))], amplitude)
-            plt.show()      
+            amplitude = get_amplitude(recording)    # From the Piedpiper library
+            plot_data(amplitude)
+            
             input('Press any key to continue...')
             clear()
 
