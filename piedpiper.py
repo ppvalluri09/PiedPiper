@@ -28,4 +28,7 @@ def get_amplitude(sample):
 
 def plot_data(data):
     plt.plot([x for x in range(len(data))], data)
-    plt.show()      
+    plt.show()
+
+def to_mel(data):
+    return 2595 * np.log10(1 + (data/700))

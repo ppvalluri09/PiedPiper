@@ -43,7 +43,10 @@ try:
 
             recording = recording.tolist()
             amplitude = get_amplitude(recording)    # From the Piedpiper library
-            plot_data(amplitude)
+            #plot_data(amplitude)
+            mel_amplitude = to_mel(amplitude)
+            print(mel_amplitude)
+            plot_data(mel_amplitude)
             
             input('Press any key to continue...')
             clear()
