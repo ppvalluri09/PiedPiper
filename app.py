@@ -64,8 +64,12 @@ try:
                 
             transformed_array = np.array(transformed_array)
             magnitude_fft = np.array(magnitude_fft)
-            print(transformed_array)
-            print(magnitude_fft)    
+            #print(transformed_array)
+            #print(magnitude_fft)
+            amplitude = []
+            for row in magnitude_fft:
+                amplitude.append((row[0] + row[1]) / 2.0)
+            print(amplitude)
             input('Press any key to continue...')
             clear()
 
