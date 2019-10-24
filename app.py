@@ -56,8 +56,8 @@ try:
 
         if value == 1:
 
-            d = 45
-            duration, recording = record_audio(30)
+            d = 10
+            duration, recording = record_audio(d)
             #amplitude = get_amplitude(recording)    # From the Piedpiper library
             #plot_data(amplitude)
             #chunk_peaks = get_chunks(amplitude, duration)

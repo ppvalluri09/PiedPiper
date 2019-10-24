@@ -1,5 +1,4 @@
 import sounddevice as sd
-from spectrogram import *
 import time
 #from matplotlib import pyplot as plt
 from math import log2
