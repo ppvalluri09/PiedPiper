@@ -32,7 +32,7 @@ def plot_data(data):
     plt.show()
 
 def scatter_data(data):
-    plt.scatter([x for x in range(len(data))], data, s = 7, c = 'r')
+    plt.scatter([x for x in range(len(data))], data, s = 1, c = 'r')
     plt.show()
 
 def to_mel(data):
@@ -42,12 +42,14 @@ def to_mel(data):
 
 def get_chunks(data, duration):
     duration = duration * 1000
-    n_chunks = len(data) // duration
+    n_chunks = int(len(data) / duration)
     chunk_peaks = []
+    prev = 0
     for i in range(n_chunks):
-        row = list(data[i:i + duration])
+        row = list(data[prev:prev + duration])
         row.sort(reverse=True)
         row = list(row[:50])    
         chunk_peaks.append(row)
+        prev = prev + duration + 1
     return list(chain.from_iterable(chunk_peaks))
         
