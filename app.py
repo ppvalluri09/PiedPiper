@@ -50,6 +50,7 @@ try:
             #recording = record_audio()
             recording = record_audio()
             sd.wait()
+            print('Recorded')
             #sd.play(recording)
             #print(row for row in recording)
 
@@ -60,10 +61,10 @@ try:
                 transformed_array.append(cooley_tukey(list(row)))
                 magnitude_fft.append(np.absolute(row))
                 
-            #ftt_array = np.array(transformed_array).T
-            #print(transformed_array)
+            transformed_array = np.array(transformed_array)
+            magnitude_fft = np.array(magnitude_fft)
+            print(transformed_array)
             print(magnitude_fft)
-            # Error with the Cooley-Tukey Algorithm
             input('Press any key to continue...')
             clear()
 
