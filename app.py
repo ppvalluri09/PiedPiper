@@ -70,6 +70,8 @@ try:
             for row in magnitude_fft:
                 amplitude.append((row[0] + row[1]) / 2.0)
             print(amplitude)
+            plt.plot([x for x in range(len(amplitude))], amplitude)
+            plt.show()
             input('Press any key to continue...')
             clear()
 
