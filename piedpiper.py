@@ -31,4 +31,6 @@ def plot_data(data):
     plt.show()
 
 def to_mel(data):
-    return 2595 * np.log10(1 + (data/700))
+    for i in range(len(data)):
+        data[i] = 2595 * np.log10(1 + (data[i]/700))
+    return data
