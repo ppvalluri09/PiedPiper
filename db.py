@@ -76,13 +76,10 @@ def get_data(table_name = 'total', condition = 'None', condition_value = 'None')
             print('Exception Raised: ' + str(e))
 
     elif table_name != 'total' and condition != 'None':
-        try:
-            command = 'select * from {} where {} = "{}"'.format(table_name, condition, condition_value)
-            cursor.execute(command)
-            ans = cursor.fetchall()
-            return ans
-        except Exception as e:
-            print('Exception Raised: ' + str(e))
+        command = 'select * from {} where {} = "{}"'.format(table_name, condition, condition_value)
+        cursor.execute(command)
+        ans = cursor.fetchall()
+        return ans
 
     else:
         try:

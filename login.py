@@ -36,7 +36,11 @@ def login_menu():
             username = str(input('Username: '))
             password = hashlib.sha256(getpass.getpass().encode()).hexdigest()
             ans = get_data('credentials', 'username', username)
-            #ans = get_data('credentials')
+            if len(ans) == 0:
+                print('No User found, please sign up')
+                sleep(2)
+                clear()
+                login_menu()
             if password == ans[0][1]:
                 clear()
                 print('Log In successful, redirecting to app')
@@ -44,6 +48,11 @@ def login_menu():
                 clear()
                 welcome_screen()
                 return username
+            else:
+                print('Incorrect Password, enter again')
+                sleep(2)
+                clear()
+                login_menu()
                 
         elif value == 2:
             username = str(input('Username: '))

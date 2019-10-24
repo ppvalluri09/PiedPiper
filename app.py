@@ -5,6 +5,7 @@ import time
 import sys
 from login import *
 import numpy as np
+from matplotlib import pyplot as plt
 
 fs = 44100
 sd.default.samplerate = fs
@@ -49,15 +50,19 @@ try:
             #recording = record_audio()
             recording = record_audio()
             sd.wait()
-            sd.play(recording)
+            #sd.play(recording)
             #print(row for row in recording)
 
-            '''recording = recording.tolist()
+            recording = recording.tolist()
             transformed_array = []
+            magnitude_fft = []
             for row in recording:
                 transformed_array.append(cooley_tukey(list(row)))
+                magnitude_fft.append(np.absolute(row))
+                
             #ftt_array = np.array(transformed_array).T
-            print(fft_array)'''
+            #print(transformed_array)
+            print(magnitude_fft)
             # Error with the Cooley-Tukey Algorithm
             input('Press any key to continue...')
             clear()

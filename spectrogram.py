@@ -30,12 +30,12 @@ def cooley_tukey(X):
     return result
 
 #X = [1, 4, 3, 2, 2, 3, 4, 1]
-X = []
-for i in range(10):
-    X.append(random())
+#X = []
+#for i in range(10):
+    #X.append(random())
 
-Y = cooley_tukey(X)
+#Y = cooley_tukey(X)
 #print(Y)
-T = dft(X)
+#T = dft(X)
 #print(T)
 
