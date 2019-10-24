@@ -4,7 +4,6 @@ import sys
 from login import *
 from piedpiper import *
 
-duration = 3
 
 def display_menu():
     print('''
@@ -27,26 +26,14 @@ try:
     while True:
 
         if value == 1:
-            print('Audio will be recorded in ')
-            print('3')
-            time.sleep(1)
-            print('2')
-            time.sleep(1)
-            print('1')
 
-        
-            print('Recording Started')
-            duration = 3
-            recording = record_audio(duration)
-            print('Recorded')
-            #sd.play(recording)
-
-            recording = recording.tolist()
-            amplitude = get_amplitude(recording)    # From the Piedpiper library
+            duration, recording = record_audio()
+            #amplitude = get_amplitude(recording)    # From the Piedpiper library
             #plot_data(amplitude)
-            chunk_peaks = get_chunks(amplitude, duration)
-            print(chunk_peaks)
-            scatter_data(chunk_peaks)
+            #chunk_peaks = get_chunks(amplitude, duration)
+            #plot_data(to_list(chunk_peaks))
+            #dist = calculate_peak_distance(amplitude, duration)
+            confidence = fingerprint(recording, duration)
             
             input('Press any key to continue...')
             clear()
@@ -54,7 +41,25 @@ try:
             display_menu()
             value = int(input('Enter your desired operation:- '))
         elif value == 2:
-            print('Fingerprint a song')
+
+            d = 3
+            duration, recording = record_audio(d)
+            confidence = fingerprint(recording, duration)
+            print(confidence)
+            print('Please enter the following data: \n')
+            song_name = '"{}"'.format(str(input('Song Name: ')))
+            album = '"{}"'.format(str(input('Album: ')))
+            artist = '"{}"'.format(str(input('Artist: ')))
+            genre = '"{}"'.format(str(input('Genre: ')))
+            duration = '"{}"'.format(str(input('Duration: ')))
+            donwloads = int(input('Downloads: '))
+            rank = int(input('Billboards Rank: '))
+            year = int(input('Year: '))
+            likes = int(input('Likes(%): '))
+            apple_music = '"{}"'.format(str(input('Apple Music Link: ')))
+            spotify = '"{}"'.format(str(input('Spotify Link: ')))
+
+
             input('Press any key to continue...')
             clear()
 
