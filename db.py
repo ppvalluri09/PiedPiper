@@ -17,7 +17,8 @@ def create_table(table_name):
     commands = ['create table song_info(song_id number(4) primary key, song_name varchar not null, album varchar, artist varchar, genre varchar, duration varchar(4));',
                 'create table stats(song_id number(4), downloads number, billboards_rank number, year number(4) not null, likes number(3), constraint fk_stats foreign key(song_id) references song_info(song_id));',
                 'create table links(song_id number(4), apple_music varchar, spotify varchar, constraint fk_links foreign key(song_id) references song_info(song_id));',
-                'create table credentials(username varchar primary key, password varchar(64) not null);']
+                'create table credentials(username varchar primary key, password varchar(64) not null);',
+                'create table fingerprints(song_id number(4), confidence number, constraint fk_fingerprints foreign key(song_id) references song_info(song_id))']
 
     try:
         if table_name == 'song_info':
@@ -82,13 +83,11 @@ def get_data(table_name = 'total', condition = 'None', condition_value = 'None')
         return ans
 
     else:
-        try:
-            command = 'select * from {}'.format(table_name)
-            cursor.execute(command)
-            ans = cursor.fetchall()
-            return ans
-        except Exception as e:
-            print('Exception Raised: ' + str(e))
+    
+        command = 'select * from {}'.format(table_name)
+        cursor.execute(command)
+        ans = cursor.fetchall()
+        return ans
 
 def modify_data(table_name, column_name, value, condition, condition_value):
 
@@ -102,4 +101,4 @@ def modify_data(table_name, column_name, value, condition, condition_value):
         print('Data Updated')
     except Exception as e:
         print('Exception Raised: ' + str(e))
-    
+

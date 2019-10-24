@@ -15,18 +15,18 @@ def record_audio(d = -1):
         duration = int(input('Enter the duration of recording: '))
     else:
         duration = d
-    print('Audio will be recorded in ')
+    print('I\'m all ears ')
     print('3')
     time.sleep(1)
     print('2')
     time.sleep(1)
     print('1')
         
-    print('Recording Started')
+    print('Listening...')
     
     recording = sd.rec(int(duration * fs))
     sd.wait()
-    print('Recorded')
+    print('Ahaan, got that')
     return duration, recording.tolist()
 
 def get_amplitude(sample):
