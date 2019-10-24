@@ -2,6 +2,10 @@ import sounddevice as sd
 from spectrogram import *
 import time
 #from matplotlib import pyplot as plt
+from math import log2
+from cmath import exp, pi
+from random import random
+import numpy as np
 from itertools import chain
 from scipy.io import wavfile
 import pydub
@@ -9,6 +13,32 @@ import pydub
 fs = 44100
 sd.default.samplerate = fs
 sd.default.channels = 2
+
+#normal slow dft
+def dft(X):
+    N = len(X)
+    temp  = [0]*N
+    for i in range(N):
+        for k in range(N):
+            temp[i] += X[k] * exp(-2j*pi*i*k/N)
+
+    result = np.asarray(temp)
+    return result
+
+#cooley tukey for calculating dft(O(nlogn)) 
+def cooley_tukey(X):
+    N = len(X)
+    if N<=1:
+        return X
+    even = cooley_tukey(X[0::2])
+    odd = cooley_tukey(X[1::2])
+
+    temp = [i for i in range(N)]
+    for k in range(N//2):
+        temp[k] = even[k] + exp(-2.0j*pi*k/N)*odd[k]
+        temp[k+N//2] = even[k] - exp(-2.0j*pi*k/N)*odd[k]
+    result = np.asarray(temp)
+    return result
 
 def record_audio(d = -1):
     if d == -1:

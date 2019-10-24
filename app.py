@@ -56,7 +56,7 @@ try:
 
         if value == 1:
 
-            d = 30
+            d = 45
             duration, recording = record_audio(30)
             #amplitude = get_amplitude(recording)    # From the Piedpiper library
             #plot_data(amplitude)
