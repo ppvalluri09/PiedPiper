@@ -1,6 +1,7 @@
 import sounddevice as sd
 from spectrogram import *
 from matplotlib import pyplot as plt
+from itertools import chain
 
 fs = 44100
 sd.default.samplerate = fs
@@ -30,7 +31,23 @@ def plot_data(data):
     plt.plot([x for x in range(len(data))], data)
     plt.show()
 
+def scatter_data(data):
+    plt.scatter([x for x in range(len(data))], data, s = 7, c = 'r')
+    plt.show()
+
 def to_mel(data):
     for i in range(len(data)):
         data[i] = 2595 * np.log10(1 + (data[i]/700))
     return data
+
+def get_chunks(data, duration):
+    duration = duration * 1000
+    n_chunks = len(data) // duration
+    chunk_peaks = []
+    for i in range(n_chunks):
+        row = list(data[i:i + duration])
+        row.sort(reverse=True)
+        row = list(row[:50])    
+        chunk_peaks.append(row)
+    return list(chain.from_iterable(chunk_peaks))
+        

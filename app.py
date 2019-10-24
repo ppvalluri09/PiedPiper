@@ -44,9 +44,9 @@ try:
             recording = recording.tolist()
             amplitude = get_amplitude(recording)    # From the Piedpiper library
             #plot_data(amplitude)
-            mel_amplitude = to_mel(amplitude)
-            print(mel_amplitude)
-            plot_data(mel_amplitude)
+            chunk_peaks = get_chunks(amplitude, duration)
+            print(chunk_peaks)
+            scatter_data(chunk_peaks)
             
             input('Press any key to continue...')
             clear()
