@@ -8,7 +8,7 @@ def connect_to_database(database):
     return connection
 
 
-def create_table(table_name):
+def create_table():
 
     # Establishing Connection to Database
     connection = connect_to_database("PiedPiper.db")
@@ -21,7 +21,7 @@ def create_table(table_name):
                 'create table fingerprints(song_id number(4), confidence number, constraint fk_fingerprints foreign key(song_id) references song_info(song_id))']
 
     try:
-        if table_name == 'song_info':
+        '''if table_name == 'song_info':
             cursor.execute(commands[0])
         elif table_name == 'stats':
             cursor.execute(commands[1])
@@ -29,8 +29,13 @@ def create_table(table_name):
             cursor.execute(commands[2])
         elif table_name == 'credentials':
             cursor.execute(commands[3])
+        elif table_name == 'fingerprints'
+        '''
+        for command in commands:
+            cursor.execute(command)
 
-        print('Table {} created'.format(table_name))
+        #print('Table {} created'.format(table_name))
+        print('Tables Created')
 
     except Exception as e:
         print('Exeption Raised: ' + str(e))
@@ -62,8 +67,8 @@ def get_data(table_name = 'total', condition = 'None', condition_value = 'None')
 
     if table_name == 'total':
 
-        song_data_command = 'select song_info.song_name, song_info.album, song_info.artist, song_info.genre, song_info.duration, stats.downloads, stats.billboards_rank, stats.year, stats.likes from song_info inner join stats on song_info.song_id = stats.song_id where song_info.song_id = ' + str(condition_value)
-        link_data_command = 'select links.apple_music, links.spotify from song_info inner join links on song_info.song_id = links.song_id where song_info.song_id = ' + str(condition_value)
+        song_data_command = 'select song_info.song_name, song_info.album, song_info.artist, song_info.genre, song_info.duration, stats.downloads, stats.billboards_rank, stats.year, stats.likes from song_info inner join stats on song_info.song_id = stats.song_id where song_info.{} = {}'.format(condition, str(condition_value))
+        link_data_command = 'select links.apple_music, links.spotify from song_info inner join links on song_info.song_id = links.song_id where song_info.{} = {}'.format(condition, str(condition_value))
 
         try:
             cursor.execute(song_data_command)
@@ -102,3 +107,16 @@ def modify_data(table_name, column_name, value, condition, condition_value):
     except Exception as e:
         print('Exception Raised: ' + str(e))
 
+def delete_record(condition, condition_value):
+    tables = ['song_info', 'stats', 'links', 'fingerprints']
+    connection = connect_to_database("PiedPiper.db")
+    cursor = connection.cursor()
+    try:
+        for table in tables:
+            command = 'delete from {} where {} = {}'.format(table, condition, str(condition_value))
+            cursor.execute(command)
+    except Exception as e:
+        print('Exception Raised: ' + str(e))
+
+    connection.commit()
+    connection.close()
