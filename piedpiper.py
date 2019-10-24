@@ -1,7 +1,7 @@
 import sounddevice as sd
 from spectrogram import *
 import time
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 from itertools import chain
 from scipy.io import wavfile
 import pydub
